@@ -189,7 +189,7 @@ vector = TfidfVectorizer()
 tfidf_vectores = vector.fit_transform(df['texto_procesado'])
 tfidf_vectores = tfidf_vectores.astype(np.float32)
 
-cosine_similarities = cosine_similarity(tfidf_vectores)
+
 
 
 @app.get("/Recomendacion/{titulo}")
@@ -198,6 +198,7 @@ def recomendacion(titulo: str):
     idx = df[df['title'] == titulo].index[0]
     
     # Get the cosine similarity scores for the movie
+    cosine_similarities = cosine_similarity(tfidf_vectores)
     similarity_scores = list(enumerate(cosine_similarities[idx]))
     
     # Sort the similarity scores in descending order
