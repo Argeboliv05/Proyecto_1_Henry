@@ -2,9 +2,20 @@ from fastapi import FastAPI
 import pandas as pd
 
 import nltk
-# Descargar 'stopwords' 
-##nltk.download('punkt')
-#nltk.download('punkt_tab')
+
+import os
+
+
+# Configura el directorio persistente de NLTK
+nltk_data_dir = '/opt/render/project/src/nltk_data'
+os.environ['NLTK_DATA'] = nltk_data_dir
+
+# Crear el directorio si no existe
+if not os.path.exists(nltk_data_dir):
+    os.makedirs(nltk_data_dir)
+
+# Descargar stopwords si no están ya descargadas
+nltk.download('stopwords', download_dir=nltk_data_dir)
 
 
 from nltk.corpus import stopwords
