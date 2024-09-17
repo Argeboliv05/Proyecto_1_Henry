@@ -2,6 +2,12 @@ from fastapi import FastAPI
 import pandas as pd
 
 import nltk
+# Descargar 'stopwords' 
+nltk.download('stopwords')
+nltk.download('puntk')
+nltk.download('puntk_tab')
+
+
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 import string
@@ -11,6 +17,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 import ast
 
 import numpy as np
+
 
 
 #LEER EL DATASET
