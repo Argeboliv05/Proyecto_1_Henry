@@ -4,8 +4,8 @@ import pandas as pd
 import nltk
 # Descargar 'stopwords' 
 nltk.download('stopwords')
-nltk.download('puntk')
-nltk.download('puntk_tab')
+nltk.download('punkt')
+nltk.download('punkt_tab')
 
 
 from nltk.corpus import stopwords
