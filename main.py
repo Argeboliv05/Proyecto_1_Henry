@@ -198,8 +198,8 @@ def recomendacion(titulo: str):
     idx = df[df['title'] == titulo].index[0]
     
     # Get the cosine similarity scores for the movie
-    cosine_similarities = cosine_similarity(tfidf_vectores)
-    similarity_scores = list(enumerate(cosine_similarities[idx]))
+    cosine_similarities = cosine_similarity(tfidf_vectores[idx],tfidf_vectores).flatten()
+    similarity_scores = list(enumerate(cosine_similarities))
     
     # Sort the similarity scores in descending order
     similarity_scores = sorted(similarity_scores, key=lambda x: x[1], reverse=True)
