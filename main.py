@@ -11,8 +11,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 import ast
 
 import numpy as np
-import warnings
-warnings.filterwarnings('ignore')
+
 
 #LEER EL DATASET
 df = pd.read_csv('dataset.csv')
