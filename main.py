@@ -174,7 +174,7 @@ stop_words = set(stopwords.words('english'))  #Conjunto que se utiliza para filt
 def tokenizacion(texto):
     texto = texto.lower()
     texto = texto.translate(str.maketrans('', '', string.punctuation))
-    tokens = tokens = word_tokenize(texto)
+    tokens = word_tokenize(texto)
     return [palabra for palabra in tokens if palabra not in stop_words]
 
 
@@ -194,24 +194,22 @@ tfidf_vectores = tfidf_vectores.astype(np.float32)
 
 @app.get("/Recomendacion/{titulo}")
 def recomendacion(titulo: str):
-     # Find the index of the movie with the given title
+     # Buscar dentro del Dataframe, el indice que corresponda al titulo buscado
     idx = df[df['title'] == titulo].index[0]
     
-    # Get the cosine similarity scores for the movie
-    cosine_similarities = cosine_similarity(tfidf_vectores[idx],tfidf_vectores).flatten()
-    similarity_scores = list(enumerate(cosine_similarities))
+    # Calculo de similitud del coseno entre el vector que representa el titulo y el resto de los vectores
+    similitud_coseno = cosine_similarity(tfidf_vectores[idx],tfidf_vectores).flatten()
+    similitud = list(enumerate(similitud_coseno))
     
-    # Sort the similarity scores in descending order
-    similarity_scores = sorted(similarity_scores, key=lambda x: x[1], reverse=True)
+    # Ordenar similitud de mayor a menor: para ver quienen tienen mayor similitud
+    similitud = sorted(similitud, key=lambda x: x[1], reverse=True)
     
-    # Get the top_n movie indices
+    # Obtener las 5 recoemndaciones
     top_n=5
-    indices = [i[0] for i in similarity_scores[1:top_n+1]]
+    indices = [i[0] for i in similitud[1:top_n+1]]
 
 
     resultados = {index: df['title'].iloc[index] for index in indices}
-
-    # Return the top_n most similar movies
     return resultados
 
 
