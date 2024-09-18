@@ -19,7 +19,7 @@ import numpy as np
 
 
 #LEER EL DATASET
-df = pd.read_csv('dataset.csv')
+df = pd.read_csv('./dataset.csv')
 
 #CREAR LA INSTANCIA DE LA APLICACION FASTAPI
 app = FastAPI()
